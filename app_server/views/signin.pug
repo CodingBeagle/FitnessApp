@@ -1,0 +1,25 @@
+extends layout
+
+block content
+	.row.col-6
+		h1 Login and signup
+	.row.col-6
+		p New users can write their desired username to create a new user
+		p Old users can fill in their username and press login to see your existing workouts
+	hr
+	.row
+		.col-md-3
+			h2 Login
+			form(action='/Login' method='post')
+				h5 Username:
+				input(type='text' name='username')
+				br
+				input(type='submit' class='btn btn-primary' value='Log in')
+				p #{LoginErrorMessage}
+		.col-md-3
+			h2 Sign up
+			form(action='/CreateUser' method='post')
+				h5 Username: 
+				input(type='text' name='username')
+				br
+				input(type='submit' class='btn btn-primary' value='Create User')
