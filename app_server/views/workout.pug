@@ -6,3 +6,12 @@ block content
 	.row.col-6
 		p This is your current workouts 
 		p You currently have #{user.workoutprograms.length} workouts!
+
+		.col-md-3.box-shadow
+			.text-shadow
+				h2 Sign up
+			form(action='/CreateWorkout' method='post')
+				h5 Workout name: 
+				input(type='text' class='btn-space' style="color:black" name='workoutname')
+				br
+				input(type='submit' class='btn btn-success' value='Create Workout')

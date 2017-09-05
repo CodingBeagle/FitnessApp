@@ -27,6 +27,13 @@ module.exports.Login = function(req,res)
 	});
 };
 
+module.exports.Workout = function(req, res)
+{
+
+};
+
+
+
 module.exports.CreateUser = function(req,res)
 {
 	var username = req.body.username;
@@ -39,4 +46,16 @@ module.exports.CreateUser = function(req,res)
 			console.log('User added: ' + user );
 			res.render('workout', {user : user});
 		});
+};
+
+module.exports.CreateWorkout = function(res, req)
+{
+	var user = 1;
+	console.log(user);
+	workout.CreateWorkout(user, function(err)
+	{
+		console.log('Aww ma gaaawd');
+	});
+
+	res.render('workout', {user:user});
 };

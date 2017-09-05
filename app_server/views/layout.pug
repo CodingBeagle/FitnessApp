@@ -3,17 +3,17 @@ html
   head
     title= title
     link(rel='stylesheet', href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous")
-        
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
-    #container.col-12
-        nav(class='navbar navbar-expand-lg navbar-light bg-light')
-            a(class='navbar-brand') FitnessApp
+    .nav-pad
+        nav(class='navbar navbar-expand-lg navbar-light bg-faded')
+            img(class="d-inline-block align-top btn-space" src="/glyphicon/heart.png" width="30" height="30" alt="")
+            a(class='navbar-brand navbar-inverse btn-space') FitnessApp
             ul(class='navbar-nav mr-auto')
                 li(class='nav-item active')
-                    a(class='nav-link' href='/') Home
+                    a(class='btn align-middle btn-outline-secondary btn-space' href='/') Home
                 li(class='nav-item active')
-                    a(class='nav-link' href='/signin') Sign In
+                    a(class='btn btn-outline-secondary btn-space' href='/SignIn') Login
 
     .custom-center
         block content
