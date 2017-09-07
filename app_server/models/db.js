@@ -1,4 +1,4 @@
-svar mongoose = require('mongoose');
+var mongoose = require('mongoose');
 var readLine = require('readline');
 
 if (process.platform === "win32"){

@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Users = mongoose.model('Users');
 var Exercise = mongoose.model('Exercises')
-var WorkoutProgram = mongoose.model(Workouts);
+var WorkoutProgram = mongoose.model('Workouts');
 
 
 
