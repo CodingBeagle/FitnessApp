@@ -10,6 +10,7 @@ router.get('/Workout', homeController.Workout);
 
 router.post('/CreateUser', homeController.CreateUser);
 router.post('/Login', homeController.Login);
-router.post('/CreateWorkout', homeController.CreateWorkout)
+router.post('/CreateWorkout', homeController.CreateWorkout);
+router.post('/ShowExercises', homeController.ShowExercises);
 
 module.exports = router;

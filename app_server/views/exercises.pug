@@ -1,0 +1,18 @@
+extends layout
+block content
+    h1 Workout #{workoutname}!
+
+    if user.workoutprograms
+    table.table
+        thead
+            tr
+                th #
+                th Name
+                th Description
+                th Sets
+                th Reps
+        tbody
+            each workoutProgram, index in user.workoutprograms
+                if (workoutProgram.workoutName == workoutname)
+                    p WE FOUND STUFF
+

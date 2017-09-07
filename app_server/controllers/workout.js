@@ -16,7 +16,14 @@ module.exports.GetUser = function(username, callback)
 
 module.exports.GetUsersWorkout = function(username, callback)
 {
+	
+}
 
+module.exports.GetWorkout = function(user, workoutname, callback)
+{
+	Users.findOne({'workoutprograms': {$elemMatch: {workoutName: workoutname}}}, function (err, workout)
+	{
+	})
 }
 
 module.exports.UpdateWorkout = function(req,res)

@@ -1,17 +1,25 @@
 extends layout
 
-block content 
-	.row.col-6
+block content
 		h1 Welcome #{user.username}!
-	.row.col-6
-		p This is your current workouts 
+		p This is your current workouts
 		p You currently have #{user.workoutprograms.length} workouts!
 
-		ul
-			if user.workoutprograms
-				each workoutProgram in user.workoutprograms
-					li= workoutProgram.workoutName
-
+		if user.workoutprograms
+			table.table
+				thead
+					tr
+						th #
+						th Name
+				tbody
+					each workoutProgram, index in user.workoutprograms
+						tr
+							th= index
+							th
+								form(action='/ShowExercises' method='post')
+									input(type='hidden' name='workoutName' value='' + workoutProgram.workoutName)
+									input(class='btn' type='submit' value = '' + workoutProgram.workoutName) 
+							
 		.col-md-12.box-shadow
 			.text-shadow
 				h2 Create New Workout

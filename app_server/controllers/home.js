@@ -26,7 +26,7 @@ module.exports.Login = function(req,res)
 
 		console.log(user);
 		currentlySignedInUser = user;
-		res.render('workout', {user : user});
+		res.render('workout', {user : currentlySignedInUser});
 	});
 };
 
@@ -49,6 +49,20 @@ module.exports.CreateUser = function(req,res)
 			res.render('workout', {user : user});
 		});
 };
+
+module.exports.ShowExercises = function(req, res)
+{
+	var workoutName = req.body.workoutName;
+	console.log("The fucking name man: " + workoutName);
+
+	/*
+	workout.GetWorkout(currentlySignedInUser, workoutName, function(theWorkerOuter)
+	{
+		console.log("buuuuh!");
+	})*/
+
+	res.render('exercises', {user : currentlySignedInUser, workoutname : workoutName });
+}
 
 module.exports.CreateWorkout = function(req, res)
 {
