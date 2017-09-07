@@ -1,4 +1,4 @@
-var mongoose = require('mongoose');
+svar mongoose = require('mongoose');
 var readLine = require('readline');
 
 if (process.platform === "win32"){
@@ -15,6 +15,9 @@ if (process.platform === "win32"){
 }
 
 var dbURI = 'mongodb://localhost/27017/';
+if (process.env.NODE_ENV === 'production') {
+dbURI = 'mongodb://fitnessapp:fitnessapp@ds127854.mlab.com:27854/fitnessapp';
+}
 mongoose.connect(dbURI);
 
 
