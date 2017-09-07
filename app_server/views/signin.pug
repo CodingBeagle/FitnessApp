@@ -12,7 +12,7 @@ block content
 			h2 Login
 			form(action='/Login' method='post')
 				h5 Username:
-				input(type='text' class='btn-space' style="color:black" name='username')
+				input(type='text' class='btn-space form-control' style="color:black" name='username' required)
 				br
 				input(type='submit' class='btn btn-success' value='Log in')
 				.bg-danger.text-white
@@ -22,6 +22,6 @@ block content
 			h2 Sign up
 			form(action='/CreateUser' method='post')
 				h5 Username: 
-				input(type='text' class='btn-space' style="color:black" name='username')
+				input(type='text' class='btn-space form-control' style="color:black" name='username' required)
 				br
 				input(type='submit' class='btn btn-success' value='Create User')

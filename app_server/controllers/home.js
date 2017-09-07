@@ -1,7 +1,5 @@
 var workout = require('./workout.js');
 
-var currentlySignedInUser = null;
-
 module.exports.index = function(req,res)
 {
     res.render('index', {title: "FitnessApp"});
@@ -24,7 +22,6 @@ module.exports.Login = function(req,res)
 			res.render('signin', {LoginErrorMessage : 'User does not exist'})
 		}
 
-		//currentlySignedInUser = user;
 		req.session.user = user;
 		res.render('workout', {user : user});
 	});
@@ -45,7 +42,6 @@ module.exports.CreateUser = function(req,res)
 		}
 		
 		console.log('User added: ' + user );
-		//currentlySignedInUser = user;
 		req.session.user = user;
 		res.render('workout', {user : user});
 	});
@@ -54,12 +50,14 @@ module.exports.CreateUser = function(req,res)
 module.exports.ShowExercises = function(req, res)
 {
 	var workoutName = req.body.workoutName;
+	console.log("Welcome to exercises!");
+	console.log(req.session.user.workoutprograms[1].exercises);
 	res.render('exercises', {user : req.body.user, workoutname : workoutName });
 }
 
 module.exports.CreateExercise = function(req, res)
 {
-	res.end();
+	console.log("CREATE EXERCISE");
 }
 
 module.exports.CreateWorkout = function(req, res)

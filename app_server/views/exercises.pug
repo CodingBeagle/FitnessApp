@@ -3,45 +3,37 @@ block content
     h1 Workout #{workoutname}
 
     if user.workoutprograms
-        if user.workoutprograms.exercises
-            table.table.table-striped.table-hover.table-responsive.mytable
-                thead
-                    tr
-                        th Exercise
-                        th Description
-                        th Sets
-                        th Reps
-                tbody
-                    each workoutProgram, index in user.workoutprograms
-                        if (workoutProgram.workoutName == workoutname)
-                            p WE FOUND STUFF
-                            each exercise, index in workoutProgram.exercises
-                                th= exercise.exerciseName
-                                th= exercise.description
-                                th= exercise.sets
-                                th= exercise.reps
-        else
-            h6.text-danger Found no exercises in this workout
-            p Use the forms below to add new exercises!
+        table.table.table-striped.table-hover.table-responsive.mytable
+            thead
+                tr
+                    th Exercise
+                    th Description
+                    th Sets
+                    th Reps
+            tbody
+                each workoutProgram, index in user.workoutprograms
+                    if (workoutProgram.workoutName == workoutname)
+                        p WE FOUND STUFF
+                        each exercise, index in workoutProgram.exercises
+                            th= exercise.exerciseName
+                            th= exercise.description
+                            th= exercise.sets
+                            th= exercise.reps
+    else
+        h6.text-danger Found no exercises in this workout
+        p Use the forms below to add new exercises!
+    
     hr
     .col-md-24
             h2 Add new exercise to workout
-            form(action='/CreateExercise' method='post')
-            .row
-                .col-md-2
-                    h5 Exercise: 
-                    input(type='text' class='btn-space' style="color:black" name='exercise')
-                .col-md-2
-                    h5 Description: 
-                    input(type='text' class='btn-space' style="color:black" name='description')
-                .col-md-2
-                    h5 Sets: 
-                    input(type='text' class='btn-space' style="color:black" name='sets')
-                .col-md-2
-                    h5 Reps: 
-                    input(type='text' class='btn-space' style="color:black" name='reps')
-            .row.col
+            form(action='/CreateExercise' method='post' class='form-inline' autocomplete='off')
+                input(type='text' class='btn-space form-control' style="color:black" name='exercise' placeholder='Exercise' required)
+                input(type='text' class='btn-space form-control' style="color:black" name='description' placeholder='Description' required)
+                input(type='number' class='btn-space form-control' style="color:black" name='sets' placeholder='1' required)
+                input(type='text' class='btn-space form-control' style="color:black" name='reps' placeholder='Reps' required)
+                input(type='hidden' name='workoutname' value=''+ workoutname)
                 input(type='submit' class='btn btn-success' value='Add Exercise')
+                input(type='reset' class='btn btn-danger')
     hr
 
 

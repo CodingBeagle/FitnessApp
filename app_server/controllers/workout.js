@@ -32,7 +32,11 @@ module.exports.CreateWorkout = function(user, workoutName, callback)
 
 module.exports.CreateExercise = function(user, workoutname, callback)
 {
-	
+	user.workoutprograms.findOne({workoutname: workoutname}, function(err, dasd)
+	{
+		console.log("---------------------------------------------- LOOK HERE DUDUM-------------");
+		console.log(err);
+	});
 }
 
 /*UNUSED */

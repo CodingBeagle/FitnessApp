@@ -35,7 +35,7 @@ block content
 			h2 Create New Workout
 			form(action='/CreateWorkout' method='post')
 				h5 Workout name: 
-				input(type='text' class='btn-space' style="color:black" name='workoutname')
+				input(type='text' class='btn-space form-control' style="color:black" name='workoutname' required)
 				br
 				input(type='submit' class='btn btn-success' value='Create Workout')
 	else 
