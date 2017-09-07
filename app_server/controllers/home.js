@@ -50,9 +50,7 @@ module.exports.CreateUser = function(req,res)
 module.exports.ShowExercises = function(req, res)
 {
 	var workoutName = req.body.workoutName;
-	console.log("Welcome to exercises!");
-	console.log(req.session.user.workoutprograms[1].exercises);
-	res.render('exercises', {user : req.body.user, workoutname : workoutName });
+	res.render('exercises', {user : req.session.user, workoutname : workoutName });
 }
 
 module.exports.CreateExercise = function(req, res)
