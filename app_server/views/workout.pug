@@ -22,6 +22,7 @@ block content
 								.row.btn-space
 									form(action='/ShowExercises' method='post')
 										input(type='hidden' name='workoutName' value='' + workoutProgram.workoutName)
+										input(type='hidden' name='user' value=user)
 										input(class='btn btn-success' type='submit' value="Manage") 
 									form(action='/DeleteWorkout' method='post')
 										input(type='hidden' name='workoutName' value='' + workoutProgram.workoutName)

@@ -16,17 +16,24 @@ a {
 	margin: auto;
 	width: 80%;
 	padding-top: 1%;
-	border-radius: 15px;
+	background-color: rgb(242, 242, 242);
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+    border: 0;
+    border-bottom: 1px solid rgba(0,0,0,.1);
 }
 
+.text-black{
+	color: black !important;
+}
 .custom-center{
 	margin: auto;
 	width: 80%;
 	padding-top: 1%;
 	padding-left: 3%;
 	padding-bottom: 15%;
-	border-top-left-radius: 15px;
-	border-top-right-radius: 15px;
 	background-color: rgb(242, 242, 242);
 	color: black;
 }
@@ -41,6 +48,8 @@ a {
 	color: black;
 	border-bottom-left-radius: 15px;
 	border-bottom-right-radius: 15px;
+    border: 0;
+    border-top: 1px solid rgba(0,0,0,.1);
 }
 
 .btn-space {

@@ -25,7 +25,7 @@ module.exports.Login = function(req,res)
 		}
 
 		currentlySignedInUser = user;
-		res.render('workout', {user : currentlySignedInUser});
+		res.render('workout', {user : user});
 	});
 };
 
@@ -38,21 +38,21 @@ module.exports.CreateUser = function(req,res)
 {
 	var username = req.body.username;
 	workout.CreateUser(username, function(err, user){
-			if(err){
-				console.log('An error has occured: ' + err);
-				res.render('error', err);
-			}
-			
-			console.log('User added: ' + user );
-			currentlySignedInUser = user;
-			res.render('workout', {user : user});
-		});
+		if(err){
+			console.log('An error has occured: ' + err);
+			res.render('error', err);
+		}
+		
+		console.log('User added: ' + user );
+		currentlySignedInUser = user;
+		res.render('workout', {user : user});
+	});
 };
 
 module.exports.ShowExercises = function(req, res)
 {
 	var workoutName = req.body.workoutName;
-	res.render('exercises', {user : currentlySignedInUser, workoutname : workoutName });
+	res.render('exercises', {user : req.body.user, workoutname : workoutName });
 }
 
 module.exports.CreateExercise = function(req, res)
