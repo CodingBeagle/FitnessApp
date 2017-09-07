@@ -32,7 +32,7 @@ module.exports.Login = function(req,res)
 
 module.exports.Workout = function(req, res)
 {
-
+	res.render('workout', {user: currentlySignedInUser})
 };
 
 module.exports.CreateUser = function(req,res)

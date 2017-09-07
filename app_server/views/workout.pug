@@ -1,5 +1,6 @@
 extends layout
 
+<<<<<<< HEAD
 block content
 		h1 Welcome #{user.username}!
 		p This is your current workouts
@@ -28,3 +29,28 @@ block content
 				input(type='text' class='btn-space' style="color:black" name='workoutname')
 				br
 				input(type='submit' class='btn btn-success' value='Create Workout')
+=======
+block content 
+	if(user)
+		.row.col-6
+			h1 Welcome #{user.username}!
+		.row.col-6
+			p This is your current workouts 
+			p You currently have #{user.workoutprograms.length} workouts!
+
+			ul
+				if user.workoutprograms
+					each workoutProgram in user.workoutprograms
+						li= workoutProgram.workoutName
+
+			.col-md-12.box-shadow
+				.text-shadow
+					h2 Create New Workout
+				form(action='/CreateWorkout' method='post')
+					h5 Workout name: 
+					input(type='text' class='btn-space' style="color:black" name='workoutname')
+					br
+					input(type='submit' class='btn btn-success' value='Create Workout')
+	else
+		h2 You are not logged in
+>>>>>>> 959d14a77f60b6af93de35e03b3a98b2448404c2
