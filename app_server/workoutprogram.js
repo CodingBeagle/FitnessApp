@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 var exerciseSchema = new mongoose.Schema(
 {
-	name : String,
+	exerciseName : String,
 	description: String,
 	sets: Number,
 	reps: String
@@ -10,9 +10,9 @@ var exerciseSchema = new mongoose.Schema(
 
 var workoutSchema = new mongoose.Schema(
 {
-	name: String,
+	workoutName: String,
 	exercises : [exerciseSchema]
-})
+});
 
 var  userSchema = new mongoose.Schema(
 {

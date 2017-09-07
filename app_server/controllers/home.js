@@ -1,5 +1,7 @@
 var workout = require('./workout.js');
 
+var currentlySignedInUser = null;
+
 module.exports.index = function(req,res)
 {
     res.render('index', {title: "FitnessApp"});
@@ -23,6 +25,7 @@ module.exports.Login = function(req,res)
 		}
 
 		console.log(user);
+		currentlySignedInUser = user;
 		res.render('workout', {user : user});
 	});
 };
@@ -31,8 +34,6 @@ module.exports.Workout = function(req, res)
 {
 
 };
-
-
 
 module.exports.CreateUser = function(req,res)
 {
@@ -44,18 +45,38 @@ module.exports.CreateUser = function(req,res)
 			}
 			
 			console.log('User added: ' + user );
+			currentlySignedInUser = user;
 			res.render('workout', {user : user});
 		});
 };
 
-module.exports.CreateWorkout = function(res, req)
+module.exports.CreateWorkout = function(req, res)
 {
-	var user = 1;
-	console.log(user);
-	workout.CreateWorkout(user, function(err)
-	{
-		console.log('Aww ma gaaawd');
-	});
+	theWorkoutName = req.body.workoutname;
 
-	res.render('workout', {user:user});
+	workout.CreateWorkout(currentlySignedInUser, theWorkoutName, function(err, updatedUser)
+	{
+		console.log("The updated USER");
+		console.log(updatedUser);
+
+		if (err)
+		{
+			res.render('error', err);	
+		}
+
+		workout.GetUser(currentlySignedInUser.username, function(err, foundUser)
+		{
+			if (err)
+			{
+				res.render('error', err)				
+			}
+
+			if (foundUser != null)
+			{
+				currentlySignedInUser = foundUser;	
+			}
+
+			res.render('workout', {user : currentlySignedInUser});
+		})
+	});
 };

@@ -1,9 +1,7 @@
 var mongoose = require('mongoose');
 var Users = mongoose.model('Users');
 var Exercise = mongoose.model('Exercises')
-var WorkoutProgram = mongoose.model(Workouts);
-
-
+var WorkoutProgram = mongoose.model('Workouts');
 
 module.exports.CreateUser = function(username, callback)
 {
@@ -15,6 +13,11 @@ module.exports.GetUser = function(username, callback)
 {
 	Users.findOne({username : username}, callback);
 };
+
+module.exports.GetUsersWorkout = function(username, callback)
+{
+
+}
 
 module.exports.UpdateWorkout = function(req,res)
 {
@@ -30,15 +33,18 @@ module.exports.UpdateWorkout = function(req,res)
 		});
 };
 
-module.exports.CreateWorkout = function(user, callback)
+module.exports.CreateWorkout = function(user, workoutName, callback)
 {
 	Users.findOne({username : user.username}, function(err, dbUser)
 	{
-		var input = user.workoutprograms[1].exercises[1];
-		var workoutname = user.workoutprograms[1].name;
-		//var newExercise = new Exercise({name : input.name, description : input.description, sets : input.sets, reps : input.reps});
-		var newProgram = new WorkoutProgram({name : workoutname /*, exercises : newExercise*/})
-		dbUser.workoutprograms.push({workoutprograms : newProgram})
+		if (dbUser == null || err)
+		{
+			console.log("Failed to find user with username: " + dbUser.username);
+			callback(err);
+		}
+
+		var newProgram = new WorkoutProgram ( {workoutName : workoutName} );
+		dbUser.workoutprograms.push(newProgram);
 		dbUser.save(callback);
 	})
 };

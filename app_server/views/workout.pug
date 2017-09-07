@@ -7,9 +7,14 @@ block content
 		p This is your current workouts 
 		p You currently have #{user.workoutprograms.length} workouts!
 
-		.col-md-3.box-shadow
+		ul
+			if user.workoutprograms
+				each workoutProgram in user.workoutprograms
+					li= workoutProgram.workoutName
+
+		.col-md-12.box-shadow
 			.text-shadow
-				h2 Sign up
+				h2 Create New Workout
 			form(action='/CreateWorkout' method='post')
 				h5 Workout name: 
 				input(type='text' class='btn-space' style="color:black" name='workoutname')
