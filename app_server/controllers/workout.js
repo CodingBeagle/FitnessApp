@@ -2,11 +2,6 @@ var mongoose = require('mongoose');
 var Users = mongoose.model('Users');
 var Exercise = mongoose.model('Exercises')
 var WorkoutProgram = mongoose.model('Workouts');
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 8a6bfc3033dd7cec446a27eb844d1c1fb5537eb4
 
 module.exports.CreateUser = function(username, callback)
 {

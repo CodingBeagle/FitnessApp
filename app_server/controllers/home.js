@@ -64,19 +64,11 @@ module.exports.CreateWorkout = function(req, res)
 			res.render('error', err);	
 		}
 
-		workout.GetUser(currentlySignedInUser.username, function(err, foundUser)
+		if (updatedUser != null)
 		{
-			if (err)
-			{
-				res.render('error', err)				
-			}
+			currentlySignedInUser = updatedUser;	
+		}
 
-			if (foundUser != null)
-			{
-				currentlySignedInUser = foundUser;	
-			}
-
-			res.render('workout', {user : currentlySignedInUser});
-		})
+		res.render('workout', {user : currentlySignedInUser});
 	});
 };
