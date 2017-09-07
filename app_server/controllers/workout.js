@@ -14,32 +14,6 @@ module.exports.GetUser = function(username, callback)
 	Users.findOne({username : username}, callback);
 };
 
-module.exports.GetUsersWorkout = function(username, callback)
-{
-	
-}
-
-module.exports.GetWorkout = function(user, workoutname, callback)
-{
-	Users.findOne({'workoutprograms': {$elemMatch: {workoutName: workoutname}}}, function (err, workout)
-	{
-	})
-}
-
-module.exports.UpdateWorkout = function(req,res)
-{
-		var newstuff = new Exercise ({name : 'WebStuff', description: 'great stuff', sets: 3, reps: 'so many'});
-
-		var dingus = Users.findOne({username : 'Dingus'}, function(err, user)
-		{
-			user.exerciseprogram.push({exerciseprogram : newstuff});
-			user.save(function(err)
-				{
-					console.log("Ding dong motherfucker");		
-				});
-		});
-};
-
 module.exports.CreateWorkout = function(user, workoutName, callback)
 {
 	Users.findOne({username : user.username}, function(err, dbUser)
@@ -54,4 +28,36 @@ module.exports.CreateWorkout = function(user, workoutName, callback)
 		dbUser.workoutprograms.push(newProgram);
 		dbUser.save(callback);
 	})
+};
+
+module.exports.CreateExercise = function(user, workoutname, callback)
+{
+	
+}
+
+/*UNUSED */
+module.exports.GetWorkout = function(user, workoutname, callback)
+{
+	Users.findOne({'workoutprograms': {$elemMatch: {workoutName: workoutname}}}, function (err, workout)
+	{
+	})
+}
+
+module.exports.DeleteWorkout = function(username, id, callback)
+{
+	Users.update({username: username}, { $pull: {workoutprograms : {_id : id}}}, callback);
+}
+
+module.exports.UpdateWorkout = function(req,res)
+{
+	var newstuff = new Exercise ({name : 'WebStuff', description: 'great stuff', sets: 3, reps: 'so many'});
+
+	var dingus = Users.findOne({username : 'Dingus'}, function(err, user)
+	{
+		user.exerciseprogram.push({exerciseprogram : newstuff});
+		user.save(function(err)
+		{
+			console.log("Ding dong motherfucker");		
+		});
+	});
 };

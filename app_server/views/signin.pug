@@ -2,16 +2,14 @@ extends layout
 
 block content
 	.row.col-6
-		.text-shadow
-			h1 Login and signup
+		h1 Login and signup
 	.row.col-6
 		p New users can write their desired username to create a new user
 		p Old users can fill in their username and press login to see your existing workouts
 	
 	.row
 		.col-md-3.box-shadow
-			.text-shadow
-				h2 Login
+			h2 Login
 			form(action='/Login' method='post')
 				h5 Username:
 				input(type='text' class='btn-space' style="color:black" name='username')
@@ -21,8 +19,7 @@ block content
 					p #{LoginErrorMessage}
 
 		.col-md-3.box-shadow
-			.text-shadow
-				h2 Sign up
+			h2 Sign up
 			form(action='/CreateUser' method='post')
 				h5 Username: 
 				input(type='text' class='btn-space' style="color:black" name='username')

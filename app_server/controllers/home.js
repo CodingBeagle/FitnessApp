@@ -24,7 +24,6 @@ module.exports.Login = function(req,res)
 			res.render('signin', {LoginErrorMessage : 'User does not exist'})
 		}
 
-		console.log(user);
 		currentlySignedInUser = user;
 		res.render('workout', {user : currentlySignedInUser});
 	});
@@ -53,26 +52,18 @@ module.exports.CreateUser = function(req,res)
 module.exports.ShowExercises = function(req, res)
 {
 	var workoutName = req.body.workoutName;
-	console.log("The fucking name man: " + workoutName);
-
-	/*
-	workout.GetWorkout(currentlySignedInUser, workoutName, function(theWorkerOuter)
-	{
-		console.log("buuuuh!");
-	})*/
-
 	res.render('exercises', {user : currentlySignedInUser, workoutname : workoutName });
+}
+
+module.exports.CreateExercise = function(req, res)
+{
+
 }
 
 module.exports.CreateWorkout = function(req, res)
 {
-	theWorkoutName = req.body.workoutname;
-
-	workout.CreateWorkout(currentlySignedInUser, theWorkoutName, function(err, updatedUser)
+	workout.CreateWorkout(currentlySignedInUser, req.body.workoutname, function(err,updatedUser)
 	{
-		console.log("The updated USER");
-		console.log(updatedUser);
-
 		if (err)
 		{
 			res.render('error', err);	
@@ -86,3 +77,25 @@ module.exports.CreateWorkout = function(req, res)
 		res.render('workout', {user : currentlySignedInUser});
 	});
 };
+
+module.exports.DeleteWorkout = function(req, res)
+{
+	var oId = req.body.workoutid;
+	workout.DeleteWorkout(currentlySignedInUser.username, oId, function(err, updateResponse)
+	{	
+		if(err){
+			console.log("Error cocured: " + err);
+			res.render('error', err);
+		}
+
+		workout.GetUser(currentlySignedInUser.username, function(err, user)
+		{
+			if(user != null && !err){
+				currentlySignedInUser = user;
+				console.log("currentlySignedInUser " + currentlySignedInUser);
+				res.render('workout', {user: currentlySignedInUser});
+			}
+			res.render('error', err)
+		});
+	});
+}

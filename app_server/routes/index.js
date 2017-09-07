@@ -8,9 +8,12 @@ router.get('/', homeController.index);
 router.get('/SignIn', homeController.SignIn);
 router.get('/Workout', homeController.Workout);
 
+/*Button Calls*/
 router.post('/CreateUser', homeController.CreateUser);
 router.post('/Login', homeController.Login);
 router.post('/CreateWorkout', homeController.CreateWorkout);
+router.post('/DeleteWorkout', homeController.DeleteWorkout);
 router.post('/ShowExercises', homeController.ShowExercises);
+router.post('/CreateExercise', homeController.CreateExercise);
 
 module.exports = router;

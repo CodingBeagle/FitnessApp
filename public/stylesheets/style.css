@@ -2,9 +2,9 @@ body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background: url('http://cdn-maf2.heartyhosting.com/sites/muscleandfitness.com/files/media/campus-muscle-trainint-partner-4.jpg') no-repeat center center fixed;
+  background-size: cover;
   -webkit-background-size: cover;
   -moz-background-size: cover;
-  background-size: cover;
   -o-background-size: cover;
 }
 
@@ -24,10 +24,23 @@ a {
 	width: 80%;
 	padding-top: 1%;
 	padding-left: 3%;
-	padding-bottom: 100%;
-	border-radius: 15px;
+	padding-bottom: 15%;
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
 	background-color: rgb(242, 242, 242);
 	color: black;
+}
+
+.custom-footer{
+	margin: auto;
+	width: 80%;
+	padding-top: 1%;
+	padding-left: 3%;
+	padding-bottom: 1%;
+	background-color: rgb(242, 242, 242);
+	color: black;
+	border-bottom-left-radius: 15px;
+	border-bottom-right-radius: 15px;
 }
 
 .btn-space {
@@ -44,4 +57,11 @@ a {
 
 .text-shadow{
 	text-shadow: 2px 2px 4px #000000;
+}
+
+.mytable{
+	max-width: 50%;
+	white-space: nowrap;
+  	overflow: hidden;
+  	text-overflow: ellipsis;
 }
