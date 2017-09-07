@@ -24,14 +24,15 @@ module.exports.Login = function(req,res)
 			res.render('signin', {LoginErrorMessage : 'User does not exist'})
 		}
 
-		currentlySignedInUser = user;
+		//currentlySignedInUser = user;
+		req.session.user = user;
 		res.render('workout', {user : user});
 	});
 };
 
 module.exports.Workout = function(req, res)
 {
-	res.render('workout', {user: currentlySignedInUser})
+	res.render('workout', {user: req.session.user})
 };
 
 module.exports.CreateUser = function(req,res)
@@ -44,7 +45,8 @@ module.exports.CreateUser = function(req,res)
 		}
 		
 		console.log('User added: ' + user );
-		currentlySignedInUser = user;
+		//currentlySignedInUser = user;
+		req.session.user = user;
 		res.render('workout', {user : user});
 	});
 };
@@ -57,12 +59,12 @@ module.exports.ShowExercises = function(req, res)
 
 module.exports.CreateExercise = function(req, res)
 {
-
+	res.end();
 }
 
 module.exports.CreateWorkout = function(req, res)
 {
-	workout.CreateWorkout(currentlySignedInUser, req.body.workoutname, function(err,updatedUser)
+	workout.CreateWorkout(req.session.user, req.body.workoutname, function(err,updatedUser)
 	{
 		if (err)
 		{
@@ -71,29 +73,29 @@ module.exports.CreateWorkout = function(req, res)
 
 		if (updatedUser != null)
 		{
-			currentlySignedInUser = updatedUser;	
+			req.session.user = updatedUser;	
 		}
 
-		res.render('workout', {user : currentlySignedInUser});
+		res.render('workout', {user : req.session.user});
 	});
 };
 
 module.exports.DeleteWorkout = function(req, res)
 {
 	var oId = req.body.workoutid;
-	workout.DeleteWorkout(currentlySignedInUser.username, oId, function(err, updateResponse)
+	workout.DeleteWorkout(req.session.user.username, oId, function(err, updateResponse)
 	{	
 		if(err){
 			console.log("Error cocured: " + err);
 			res.render('error', err);
 		}
 
-		workout.GetUser(currentlySignedInUser.username, function(err, user)
+		workout.GetUser(req.session.user.username, function(err, user)
 		{
 			if(user != null && !err){
-				currentlySignedInUser = user;
-				console.log("currentlySignedInUser " + currentlySignedInUser);
-				res.render('workout', {user: currentlySignedInUser});
+				req.session.user = user;
+				console.log("currentlySignedInUser " + req.session.user);
+				res.render('workout', {user: req.session.user});
 			}
 			res.render('error', err)
 		});

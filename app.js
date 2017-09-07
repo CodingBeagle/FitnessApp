@@ -5,11 +5,13 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 require('./app_server/models/db.js');
+var session = require('express-session');
 
 var index = require('./app_server/routes/index');
 var users = require('./app_server/routes/users');
 
 var app = express();
+app.use(session({secret: 'Keyboard cat'}));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'app_server', 'views'));
