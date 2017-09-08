@@ -69,8 +69,11 @@ a {
 }
 
 .mytable{
-	max-width: 50%;
-	white-space: nowrap;
-  	overflow: hidden;
-  	text-overflow: ellipsis;
+  	overflow: hidden !important;
+  	text-overflow: ellipsis !important;
+  	word-wrap:break-word !important;
+}
+
+.width{
+	max-width:10% !important;
 }

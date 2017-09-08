@@ -55,7 +55,22 @@ module.exports.ShowExercises = function(req, res)
 
 module.exports.CreateExercise = function(req, res)
 {
-	console.log("CREATE EXERCISE");
+	var exerciseData = {exercisename: req.body.exercisename, description: req.body.description, sets: req.body.sets, reps: req.body.reps};
+	workout.CreateExercise(req.session.user, req.body.workoutname, exerciseData, function(err, updatedUser)
+	{
+		req.session.user = updatedUser;
+		res.render('exercises', {user: req.session.user, workoutname: req.body.workoutname});
+	});
+}
+
+module.exports.DeleteExercise = function(req, res)
+{
+	var workoutId = req.body.workoutid;
+	var exerciseId = req.body.exerciseid;
+	workout.DeleteExercise(req.session.user, workoutId, exerciseId, function(err, updatedUser)
+	{
+		
+	});
 }
 
 module.exports.CreateWorkout = function(req, res)

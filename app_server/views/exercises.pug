@@ -10,15 +10,22 @@ block content
                     th Description
                     th Sets
                     th Reps
+                    th Manage
             tbody
                 each workoutProgram, index in user.workoutprograms
                     if (workoutProgram.workoutName == workoutname)
-                        p WE FOUND STUFF
                         each exercise, index in workoutProgram.exercises
-                            th= exercise.exerciseName
-                            th= exercise.description
-                            th= exercise.sets
-                            th= exercise.reps
+                            tr
+                                td.width= exercise.exerciseName
+                                td.width= exercise.description
+                                td.width= exercise.sets
+                                td.width= exercise.reps
+                                td.width
+                                    form(action='/DeleteExercise' method='post')
+                                        input(type='hidden' name='workoutName' value='' + workoutProgram.workoutName)
+                                        input(type='hidden' name='workoutid' value='' + workoutProgram._id)
+                                        input(type='hidden' name='exerciseid' value=''+exercise._id)
+                                        input(type='submit' class='btn btn-danger' value='Delete')
     else
         h6.text-danger Found no exercises in this workout
         p Use the forms below to add new exercises!
@@ -27,7 +34,7 @@ block content
     .col-md-24
             h2 Add new exercise to workout
             form(action='/CreateExercise' method='post' class='form-inline' autocomplete='off')
-                input(type='text' class='btn-space form-control' style="color:black" name='exercise' placeholder='Exercise' required)
+                input(type='text' class='btn-space form-control' style="color:black" name='exercisename' placeholder='Exercise' required)
                 input(type='text' class='btn-space form-control' style="color:black" name='description' placeholder='Description' required)
                 input(type='number' class='btn-space form-control' style="color:black" name='sets' placeholder='1' required)
                 input(type='text' class='btn-space form-control' style="color:black" name='reps' placeholder='Reps' required)

@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var Users = mongoose.model('Users');
-var Exercise = mongoose.model('Exercises')
+var Exercise = mongoose.model('Exercises');
 var WorkoutProgram = mongoose.model('Workouts');
 
 module.exports.CreateUser = function(username, callback)
@@ -30,38 +30,36 @@ module.exports.CreateWorkout = function(user, workoutName, callback)
 	})
 };
 
-module.exports.CreateExercise = function(user, workoutname, callback)
-{
-	user.workoutprograms.findOne({workoutname: workoutname}, function(err, dasd)
-	{
-		console.log("---------------------------------------------- LOOK HERE DUDUM-------------");
-		console.log(err);
-	});
-}
-
-/*UNUSED */
-module.exports.GetWorkout = function(user, workoutname, callback)
-{
-	Users.findOne({'workoutprograms': {$elemMatch: {workoutName: workoutname}}}, function (err, workout)
-	{
-	})
-}
-
 module.exports.DeleteWorkout = function(username, id, callback)
 {
 	Users.update({username: username}, { $pull: {workoutprograms : {_id : id}}}, callback);
 }
 
-module.exports.UpdateWorkout = function(req,res)
+module.exports.CreateExercise = function(user, workoutname, exerciseData, callback)
 {
-	var newstuff = new Exercise ({name : 'WebStuff', description: 'great stuff', sets: 3, reps: 'so many'});
-
-	var dingus = Users.findOne({username : 'Dingus'}, function(err, user)
+	Users.findOne({username: user.username}, function(err, dbUser)
 	{
-		user.exerciseprogram.push({exerciseprogram : newstuff});
-		user.save(function(err)
-		{
-			console.log("Ding dong motherfucker");		
-		});
+		if(dbUser == null || err){
+			console.log("Failed to find user with username: " + dbUser.username);
+			callback(err);
+		}
+
+		if(dbUser.workoutprograms){
+			dbUser.workoutprograms.forEach(function(program)
+			{
+				if(program.workoutName == workoutname){
+					var newExercise = new Exercise(
+						{
+							exerciseName: exerciseData.exercisename, 
+							description: exerciseData.description, 
+							sets: exerciseData.sets, 
+							reps: exerciseData.reps
+						});
+					program.exercises.push(newExercise);
+					dbUser.save(callback);
+				}
+			});
+		}
 	});
-};
+}
+
