@@ -34,13 +34,15 @@ block content
     .col-md-24
             h2 Add new exercise to workout
             form(action='/CreateExercise' method='post' class='form-inline' autocomplete='off')
-                input(type='text' class='btn-space form-control' style="color:black" name='exercisename' placeholder='Exercise' required)
-                input(type='text' class='btn-space form-control' style="color:black" name='description' placeholder='Description' required)
-                input(type='number' class='btn-space form-control' style="color:black" name='sets' placeholder='1' required)
-                input(type='text' class='btn-space form-control' style="color:black" name='reps' placeholder='Reps' required)
-                input(type='hidden' name='workoutname' value=''+ workoutname)
-                input(type='submit' class='btn btn-success' value='Add Exercise')
-                input(type='reset' class='btn btn-danger')
+                .row
+                    input(type='text' class='btn-space form-control' style="color:black" name='exercisename' placeholder='Exercise' required)
+                    input(type='text' class='btn-space form-control' style="color:black" name='description' placeholder='Description' required)
+                    input(type='number' class='btn-space form-control' style="color:black" name='sets' placeholder='1' required)
+                    input(type='text' class='btn-space form-control' style="color:black" name='reps' placeholder='Reps' required)
+                    input(type='hidden' name='workoutname' value=''+ workoutname)
+                .row
+                    input(type='submit' class='btn btn-success' value='Add Exercise')
+                    input(type='reset' class='btn btn-danger')
     hr
 
 

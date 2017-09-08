@@ -69,7 +69,11 @@ module.exports.DeleteExercise = function(req, res)
 	var exerciseId = req.body.exerciseid;
 	workout.DeleteExercise(req.session.user, workoutId, exerciseId, function(err, updatedUser)
 	{
-		
+		if(updatedUser == null || err){
+			res.render('error', err);
+		}
+		req.session.user = updatedUser;
+		res.render('exercises', {user: updatedUser, workoutname: req.body.workoutName})
 	});
 }
 

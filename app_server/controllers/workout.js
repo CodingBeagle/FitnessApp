@@ -33,7 +33,7 @@ module.exports.CreateWorkout = function(user, workoutName, callback)
 module.exports.DeleteWorkout = function(username, id, callback)
 {
 	Users.update({username: username}, { $pull: {workoutprograms : {_id : id}}}, callback);
-}
+};
 
 module.exports.CreateExercise = function(user, workoutname, exerciseData, callback)
 {
@@ -61,5 +61,17 @@ module.exports.CreateExercise = function(user, workoutname, exerciseData, callba
 			});
 		}
 	});
-}
+};
 
+module.exports.DeleteExercise = function(user, workoutid, exerciseid, callback)
+{
+	Users.findOne({_id: user._id}, function(err, dbUser)
+	{
+		if(err || dbUser == null)
+		{
+			callback(err);
+		}
+		dbUser.workoutprograms.id(workoutid).exercises.pull({_id : exerciseid});
+		dbUser.save(callback);
+	});
+};

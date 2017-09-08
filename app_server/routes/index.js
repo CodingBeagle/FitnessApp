@@ -15,5 +15,6 @@ router.post('/CreateWorkout', homeController.CreateWorkout);
 router.post('/DeleteWorkout', homeController.DeleteWorkout);
 router.post('/ShowExercises', homeController.ShowExercises);
 router.post('/CreateExercise', homeController.CreateExercise);
+router.post('/DeleteExercise', homeController.DeleteExercise);
 
 module.exports = router;
