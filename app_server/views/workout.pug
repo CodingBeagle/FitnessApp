@@ -31,13 +31,16 @@ block content
 		else
 			p You have no workouts yet!
 			p Use the box below to start creating a new workout
-		.col-md-3.box-shadow
+		hr
+		.col-md-24
 			h2 Create New Workout
 			form(action='/CreateWorkout' method='post')
-				h5 Workout name: 
-				input(type='text' class='btn-space form-control' style="color:black" name='workoutname' required)
-				br
-				input(type='submit' class='btn btn-success' value='Create Workout')
+				.row.col
+					h5 Workout name: 
+					input(type='text' class='btn-space form-control' style="color:black" name='workoutname' required)
+				.row.col
+					input(type='submit' class='btn btn-success' value='Create Workout')
+		hr
 	else 
 		h1 You have to log in!
 
