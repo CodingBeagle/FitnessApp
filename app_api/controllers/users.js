@@ -4,7 +4,7 @@ var Users = mongoose.model('Users');
 module.exports.createUser = function(req, res) {
     if (req.body)
     {
-        var newUser = new Users({username: req.body.username});
+        var newUser = new Users({username: req.body.username, workoutprograms: req.body.workoutprograms});
         Users.create(newUser, function(err, user)
         {
             if (err)
@@ -20,7 +20,8 @@ module.exports.createUser = function(req, res) {
             res.status(200);
             res.json(
                 {
-                    "message": "User was created successfully on database! :D"
+                    "message": "User was created successfully on database! :D",
+                    "userId" : user._id
                 }
             );
         });
@@ -37,19 +38,40 @@ module.exports.createUser = function(req, res) {
 };
 
 module.exports.getUser = function(req, res) {
-    res.status(200);
-    res.json(
-        {
-            "message": "Request to GetUser was a success! :D"
+    Users.findOne({_id : req.params.userid}, function(err, user)
+    {
+        if(user){
+            res.status(200);
+            res.json({
+                    "message": "Request to GetUser was a success! :D",
+                    "User" : user
+                });
         }
-    );
-};
+        else{
+            res.status(404);
+            res.json({
+                    "Message" : "Failed to get user",
+                    "Error" : err
+                });
+        }
+    });
+}
 
 module.exports.deleteUser = function(req, res) {
-    res.status(200);
-    res.json(
-        {
-            "message": "Request to DeleteUser was a success! :D"
+    Users.find({_id : req.params.userid}).remove().exec(function(err, updatedUser){
+        if(err){
+            res.status(500);
+            res.json({
+                "Message" : "An error has occurred - Deletion failed",
+                "Error" : err
+            });
         }
-    );
+        else{
+            res.status(200);
+            res.json({
+                    "Message" : "Deletion completed",
+                    "Affected rows" : updatedUser
+                });
+        }
+    });
 };
