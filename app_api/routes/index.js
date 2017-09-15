@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var ctrlUsers = require('../controllers/users.js');
+var ctrlWorkouts = require('../controllers/workouts.js');
 
 // Users
 router
@@ -13,6 +14,11 @@ router
     .post(ctrlUsers.createUser);
 
 // Workouts
+
+
+router
+    .route('/workouts')
+    .post(ctrlWorkouts.createWorkout);
 
 // Exercises
 
