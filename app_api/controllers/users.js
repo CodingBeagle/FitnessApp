@@ -15,15 +15,15 @@ module.exports.createUser = function(req, res) {
                         "message": "User failed to be created on database!"
                     }
                 );
+            }else{
+                res.status(200);
+                res.json(
+                    {
+                        "message": "User was created successfully on database! :D",
+                        "userId" : user._id
+                    }
+                );
             }
-
-            res.status(200);
-            res.json(
-                {
-                    "message": "User was created successfully on database! :D",
-                    "userId" : user._id
-                }
-            );
         });
     }
     else
