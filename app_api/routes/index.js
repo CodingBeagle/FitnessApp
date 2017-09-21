@@ -15,13 +15,12 @@ router
 
 // Workouts
 router
-    .route('/workouts/:workoutid')
+    .route('/users/:userid/workouts/:workoutid')
     .delete(ctrlWorkouts.deleteWorkout);
 
 router
-    .route('/workouts')
+    .route('/users/:userid/workouts')
     .post(ctrlWorkouts.createWorkout);
 
 // Exercises
-
 module.exports = router;
