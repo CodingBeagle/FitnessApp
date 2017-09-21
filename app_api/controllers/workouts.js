@@ -32,14 +32,16 @@ module.exports.createWorkout = function(req, res) {
                                 "message": "Failed to update user with new workout"
                             }
                         );
+                    } else
+                    {
+                        res.status(200);
+                        res.json(
+                            {
+                                "message": "Workout was created on the database!",
+                                "User": user
+                            }
+                        );
                     }
-
-                    res.status(200);
-                    res.json(
-                        {
-                            "message": "Workout was created on the database!"
-                        }
-                    );
                 });
             }
         })
