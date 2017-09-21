@@ -14,7 +14,9 @@ router
     .post(ctrlUsers.createUser);
 
 // Workouts
-
+router
+    .route('/workouts/:workoutid')
+    .delete(ctrlWorkouts.deleteWorkout);
 
 router
     .route('/workouts')
