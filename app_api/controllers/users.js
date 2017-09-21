@@ -38,7 +38,7 @@ module.exports.createUser = function(req, res) {
 };
 
 module.exports.getUser = function(req, res) {
-    Users.findOne({_id : req.params.userid}, function(err, user)
+    Users.findOne({username : req.params.username}, function(err, user)
     {
         if(user){
             res.status(200);

@@ -7,8 +7,11 @@ var ctrlExercises = require('../controllers/exercises.js');
 // Users
 router
     .route('/users/:userid')
-    .get(ctrlUsers.getUser)
     .delete(ctrlUsers.deleteUser);
+
+router
+	.route('/users/:username')
+	.get(ctrlUsers.getUser);
 
 router
     .route('/users')
