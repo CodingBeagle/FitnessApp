@@ -58,20 +58,14 @@ module.exports.createWorkout = function(req, res) {
 };
 
 module.exports.deleteWorkout = function(req, res) {
-    console.log("Calling delete workouts");
-
     var userId = req.params.userid;
     var workoutId = req.params.workoutid;
-
-    console.log("User to delete workout from: " + userId);
-    console.log("Workout to delete: " + workoutId);
 
     Users.update({_id: userId}, { $pull: {workoutprograms : {_id : workoutId}}}, function(err, numAffected)
     {
         console.log(err);
         if (err)
         {
-            console.log("HERKA");
             res.status(500);
             res.json(
                 {
@@ -80,7 +74,6 @@ module.exports.deleteWorkout = function(req, res) {
             );
         } else if (numAffected.nModified == 0)
         {
-            console.log("DERKA");
             res.status(409);
             res.json(
                 {
@@ -91,7 +84,6 @@ module.exports.deleteWorkout = function(req, res) {
         {
             Users.findOne({_id : userId}, function(err, dbUser)
             {
-                console.log("POOPSHIZZLE");
                 if (dbUser == null || err)
                 {
                     console.log("Failed to find user with id: " + userId);
