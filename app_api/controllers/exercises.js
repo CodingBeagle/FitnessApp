@@ -36,13 +36,14 @@ module.exports.createExercise = function(req, res){
 						            {
 						                "message": "Failed to save the exercise to the workout"
 						            });
+							} else
+							{
+								res.status(200);
+								res.json({
+									"message": "Exercise has been created",
+									"User" : updatedUser
+								});
 							}
-
-							res.status(200);
-							res.json({
-								"message": "Exercise has been created",
-								"User" : updatedUser
-							});
 						});
 					}	
 				});

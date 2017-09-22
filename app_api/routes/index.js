@@ -3,6 +3,7 @@ var router = express.Router();
 var ctrlUsers = require('../controllers/users.js');
 var ctrlWorkouts = require('../controllers/workouts.js');
 var ctrlExercises = require('../controllers/exercises.js');
+var ctrlWorkoutActivities = require('../controllers/workoutActivities.js');
 
 // Users
 router
@@ -25,6 +26,11 @@ router
 router
     .route('/users/:userid/workouts')
     .post(ctrlWorkouts.createWorkout);
+
+// Workout Activity
+router
+    .route('/users/:userid/workouts/:workoutid/workoutActivities')
+    .post(ctrlWorkoutActivities.createWorkoutActivity)
 
 // Exercises
 router

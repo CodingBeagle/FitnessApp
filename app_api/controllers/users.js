@@ -4,7 +4,7 @@ var Users = mongoose.model('Users');
 module.exports.createUser = function(req, res) {
     if (req.body)
     {
-        var newUser = new Users({username: req.body.username, workoutprograms: req.body.workoutprograms});
+        var newUser = new Users({username: req.body.username, workoutprograms: req.body.workoutprograms, });
         Users.create(newUser, function(err, user)
         {
             if (err)

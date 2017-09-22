@@ -8,10 +8,17 @@ var exerciseSchema = new mongoose.Schema(
 	reps: String
 });
 
+var activitySchema = new mongoose.Schema(
+{
+	timestamp: String,
+	description: String
+});
+
 var workoutSchema = new mongoose.Schema(
 {
 	workoutName: String,
-	exercises : [exerciseSchema]
+	exercises : [exerciseSchema],
+	activities : [activitySchema]
 });
 
 var  userSchema = new mongoose.Schema(
@@ -23,3 +30,4 @@ var  userSchema = new mongoose.Schema(
 mongoose.model('Exercises', exerciseSchema, 'Exercises');
 mongoose.model('Workouts', workoutSchema, 'Workouts');
 mongoose.model('Users' , userSchema, 'Users');
+mongoose.model('Activities', activitySchema, 'Activities');
