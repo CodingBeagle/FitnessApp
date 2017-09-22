@@ -30,7 +30,11 @@ router
 // Workout Activity
 router
     .route('/users/:userid/workouts/:workoutid/workoutActivities')
-    .post(ctrlWorkoutActivities.createWorkoutActivity)
+    .post(ctrlWorkoutActivities.createWorkoutActivity);
+
+router
+    .route('/users/:userid/workouts/:workoutid/workoutActivities/:activityid')
+    .delete(ctrlWorkoutActivities.deleteWorkoutActivity);
 
 // Exercises
 router
