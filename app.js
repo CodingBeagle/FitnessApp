@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 require('./app_server/models/db.js');
 var session = require('express-session');
+var cors = require('cors');
 
 var index = require('./app_server/routes/index');
 var users = require('./app_server/routes/users');
@@ -28,6 +29,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/api', routesApi);
+app.use(cors());
 app.use('/users', users);
 
 
