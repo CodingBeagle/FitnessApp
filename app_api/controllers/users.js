@@ -20,7 +20,7 @@ module.exports.createUser = function(req, res) {
                 res.json(
                     {
                         "message": "User was created successfully on database! :D",
-                        "userId" : user._id
+                        "User" : user
                     }
                 );
             }
