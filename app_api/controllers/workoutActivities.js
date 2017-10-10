@@ -80,10 +80,10 @@ module.exports.createWorkoutActivity = function(req, res)
                 }
             })
         }
-        else{
-            res.status(401);
-            res.json({"message":"unauthorized"});
-        }
+    }
+    else{
+    res.status(401);
+    res.json({"message":"unauthorized"});
     }
 }
 
