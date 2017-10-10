@@ -4,36 +4,45 @@ var ctrlUsers = require('../controllers/users.js');
 var ctrlWorkouts = require('../controllers/workouts.js');
 var ctrlExercises = require('../controllers/exercises.js');
 var ctrlWorkoutActivities = require('../controllers/workoutActivities.js');
-var jwt = require('express-jwt');
-var auth = jwt({secret: process.env.JWT_Secret, userProperty: 'payload'});
 
 // Users
-router.delete('/users/:userid', auth, ctrlUsers.deleteUser);
-
-router.get('/users/:username', auth, ctrlUsers.getUser);
+router
+    .route('/users/:userid')
+    .delete(ctrlUsers.deleteUser);
 
 router
-    .route('/users/login')
-    .post(ctrlUsers.login);
+	.route('/users/:username')
+	.get(ctrlUsers.getUser);
 
 router
     .route('/users')
     .post(ctrlUsers.createUser);
 
 // Workouts
-router.delete('/users/:userid/workouts/:workoutid', auth, ctrlWorkouts.deleteWorkout);
+router
+    .route('/users/:userid/workouts/:workoutid')
+    .delete(ctrlWorkouts.deleteWorkout);
 
-router.post('/users/:userid/workouts', auth, ctrlWorkouts.createWorkout);
+router
+    .route('/users/:userid/workouts')
+    .post(ctrlWorkouts.createWorkout);
 
 // Workout Activity
-router.post('/users/:userid/workouts/:workoutid/workoutActivities', auth, ctrlWorkoutActivities.deleteWorkoutActivity);
+router
+    .route('/users/:userid/workouts/:workoutid/workoutActivities')
+    .post(ctrlWorkoutActivities.createWorkoutActivity);
 
-router.delete('/users/:userid/workouts/:workoutid/workoutActivities/:activityid', auth, 
-    ctrlWorkoutActivities.deleteWorkoutActivity);
-    
+router
+    .route('/users/:userid/workouts/:workoutid/workoutActivities/:activityid')
+    .delete(ctrlWorkoutActivities.deleteWorkoutActivity);
+
 // Exercises
-router.post('/users/:userid/workouts/:workoutid/exercises', auth, ctrlExercises.createExercise);
+router
+	.route('/users/:userid/workouts/:workoutid/exercises')
+	.post(ctrlExercises.createExercise);
 
-router.delete('/users/:userid/workouts/:workoutid/exercises/:exerciseid', auth, ctrlExercises.deleteExercise);
+router
+	.route('/users/:userid/workouts/:workoutid/exercises/:exerciseid')
+	.delete(ctrlExercises.deleteExercise);
 
 module.exports = router;
