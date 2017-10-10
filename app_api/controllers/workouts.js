@@ -3,7 +3,7 @@ var Users = mongoose.model('Users');
 var workout = mongoose.model('Workouts');
 
 module.exports.createWorkout = function(req, res) {
-    if (req.body)
+    if (req.body && req.payload._id == req.params.userid)
     {
         var userId = req.params.userid;
 
@@ -38,7 +38,9 @@ module.exports.createWorkout = function(req, res) {
                         res.json(
                             {
                                 "message": "Workout was created on the database!",
-                                "User": user
+                                "userid" : user._id,
+                                "username" : user.username,
+                                "workoutprograms" : user.workoutprograms
                             }
                         );
                     }
@@ -60,49 +62,52 @@ module.exports.createWorkout = function(req, res) {
 module.exports.deleteWorkout = function(req, res) {
     var userId = req.params.userid;
     var workoutId = req.params.workoutid;
-
-    Users.update({_id: userId}, { $pull: {workoutprograms : {_id : workoutId}}}, function(err, numAffected)
-    {
-        console.log(err);
-        if (err)
+    if(req.payload._id == req.params.userid){
+        Users.update({_id: userId}, { $pull: {workoutprograms : {_id : workoutId}}}, function(err, numAffected)
         {
-            res.status(500);
-            res.json(
-                {
-                    "message": "Failed to remove workout from user"
-                }
-            );
-        } else if (numAffected.nModified == 0)
-        {
-            res.status(409);
-            res.json(
-                {
-                    "message": "No workouts were removed"
-                }
-            );
-        } else
-        {
-            Users.findOne({_id : userId}, function(err, dbUser)
+            console.log(err);
+            if (err)
             {
-                if (dbUser == null || err)
-                {
-                    console.log("Failed to find user with id: " + userId);
-                    res.status(404);
-                    res.json(
-                        {
-                            "message": "Failed to find user with id: " + userId + " on database."
-                        }
-                    );
-                };
-    
-                res.status(200);
+                res.status(500);
                 res.json(
                     {
-                        "Message": "Deleted workout from user",
-                        "User": dbUser
+                        "message": "Failed to remove workout from user"
                     }
                 );
-            })
-        }
-    });
+            } else if (numAffected.nModified == 0)
+            {
+                res.status(409);
+                res.json(
+                    {
+                        "message": "No workouts were removed"
+                    }
+                );
+            } else{
+                Users.findOne({_id : userId}, function(err, dbUser)
+                {
+                    if (dbUser == null || err)
+                    {
+                        console.log("Failed to find user with id: " + userId);
+                        res.status(404);
+                        res.json(
+                            {
+                                "message": "Failed to find user with id: " + userId + " on database."
+                            }
+                        );
+                    };
+        
+                    res.status(200);
+                    res.json(
+                        {
+                            "Message": "Deleted workout from user",
+                            "userid" : user._id,
+                            "username" : user.username,
+                            "workoutprograms" : user.workoutprograms
+                        }
+                    );
+                })
+            }
+        });        
+    }
+    
 };

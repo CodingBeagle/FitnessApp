@@ -1,10 +1,13 @@
+require('dotenv').load();
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var passport = require('passport');
 require('./app_server/models/db.js');
+require('./app_api/config/passport');
 var session = require('express-session');
 var cors = require('cors');
 
@@ -29,9 +32,20 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(cors());
 app.use('/', index);
-app.use('/api', routesApi, cors());
 app.use('/users', users);
 
+app.use(express.static(path.join(__dirname, 'app_public')));
+app.use(passport.initialize());
+app.use('/api', routesApi, cors());
+
+// error handlers
+// Catch unauthorised errors
+app.use(function (err, req, res, next) {
+	if (err.name === 'UnauthorizedError') {
+		res.status(401);
+		res.json({"message" : err.name + ": " + err.message});
+	}
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -39,7 +53,6 @@ app.use(function(req, res, next) {
   err.status = 404;
   next(err);
 });
-
 
 // error handler
 app.use(function(err, req, res, next) {
