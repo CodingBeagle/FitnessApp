@@ -3,7 +3,7 @@ var Users = mongoose.model('Users');
 var workout = mongoose.model('Workouts');
 
 module.exports.createWorkout = function(req, res) {
-    if (req.body && req.payload._id == req.params.userid)
+    if (req.body.workoutName && req.payload._id == req.params.userid)
     {
         var userId = req.params.userid;
 
@@ -83,9 +83,9 @@ module.exports.deleteWorkout = function(req, res) {
                     }
                 );
             } else{
-                Users.findOne({_id : userId}, function(err, dbUser)
+                Users.findOne({_id : userId}, function(err, user)
                 {
-                    if (dbUser == null || err)
+                    if (user == null || err)
                     {
                         console.log("Failed to find user with id: " + userId);
                         res.status(404);
