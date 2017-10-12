@@ -31,6 +31,8 @@ module.exports.createUser = function(req, res) {
             res.json(
                 {
                     "message": "User was created successfully on database",
+                    "userid" : user._id,
+                    "username" : user.username,
                     "token" : token
                 }
             );
