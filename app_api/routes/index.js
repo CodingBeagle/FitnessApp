@@ -25,6 +25,8 @@ router.delete('/users/:userid/workouts/:workoutid', auth, ctrlWorkouts.deleteWor
 
 router.post('/users/:userid/workouts', auth, ctrlWorkouts.createWorkout);
 
+router.get('/workouts', ctrlWorkoutActivities.getAllWorkouts);
+
 // Workout Activity
 router.post('/users/:userid/workouts/:workoutid/workoutActivities', auth, ctrlWorkoutActivities.createWorkoutActivity);
 

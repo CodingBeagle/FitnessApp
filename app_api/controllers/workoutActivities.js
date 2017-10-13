@@ -163,3 +163,26 @@ module.exports.deleteWorkoutActivity = function(req, res)
         res.json({"message":"unauthorized"});
     }
 }
+
+module.exports.getAllWorkouts = function(req, res) {
+    var workouts = [];
+
+    Users.find({}, function(err, users) {
+        if (err) {
+            res.status(500);
+            res.json(
+                {
+                    "message": "An error occoured attempting to retrieve users."
+                });           
+        }
+
+        users.forEach(function(user) {
+            workouts = workouts.concat(user.workoutprograms);
+        });
+
+        res.status(200);
+        res.json(
+            workouts
+        );
+    });
+}
